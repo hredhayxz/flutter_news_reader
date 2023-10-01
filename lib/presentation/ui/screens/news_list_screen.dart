@@ -12,7 +12,6 @@ class NewsListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final data = ref.watch(DataProvider.articleDataProvider);
-    List<ArticlesData> articles;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Latest News"),
@@ -20,15 +19,13 @@ class NewsListScreen extends ConsumerWidget {
       body: RefreshIndicator(
         onRefresh: () async {
           print("Refreshing data...");
-          await ref.refresh(DataProvider.articleDataProvider);
+          ref.refresh(DataProvider.articleDataProvider);
           print("Data refreshed!");
         },
         child: data.when(
           data: (data) {
-            articles = data.map((e) => e).toList();
-            List dataArticle = articles;
             return ListView.builder(
-              itemCount: articles.length,
+              itemCount: data.length,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
@@ -36,13 +33,13 @@ class NewsListScreen extends ConsumerWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => NewsDetailsScreen(
-                          article: articles[index],
+                          article: data[index],
                         ),
                       ),
                     );
                   },
                   child: NewsCard(
-                    article: articles[index],
+                    article: data[index],
                   ),
                 );
               },

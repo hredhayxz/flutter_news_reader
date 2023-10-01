@@ -21,16 +21,14 @@ class NewsCard extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          child: Column(
             children: <Widget>[
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
                 child: CachedNetworkImage(
                   imageUrl: article.urlToImage.toString(),
-                  width: 100,
-                  height: 100,
+                  width: double.infinity,
+                  height: 200,
                   fit: BoxFit.cover,
                   placeholder: (context, url) => const Icon(Icons.image),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
@@ -39,23 +37,21 @@ class NewsCard extends StatelessWidget {
               const SizedBox(
                 width: 10,
               ),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      article.title.toString(),
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      article.description.toString(),
-                      style: const TextStyle(fontSize: 13, color: Colors.grey),
-                    ),
-                  ],
+              Text(
+                article.title.toString(),
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  overflow: TextOverflow.ellipsis,
                 ),
+              ),
+              Text(
+                article.description.toString(),
+                maxLines: 3,
+                style: const TextStyle(
+                    fontSize: 13,
+                    color: Colors.grey,
+                    overflow: TextOverflow.ellipsis),
               ),
             ],
           ),
