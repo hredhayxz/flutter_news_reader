@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_news_reader/data/models/news_model.dart';
+import 'package:flutter_news_reader/data/offline_data/offline_data_handler.dart';
 import 'package:flutter_news_reader/presentation/ui/screens/news_details_screen.dart';
 import 'package:flutter_news_reader/presentation/ui/widgets/news_card.dart';
 import 'package:flutter_news_reader/provider/data_provider.dart';
@@ -11,6 +12,7 @@ class NewsListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     final data = ref.watch(DataProvider.articleDataProvider);
+    List<ArticlesData> articles;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Latest News"),
@@ -23,7 +25,8 @@ class NewsListScreen extends ConsumerWidget {
         },
         child: data.when(
           data: (data) {
-            List<ArticlesData> articles = data.map((e) => e).toList();
+            articles = data.map((e) => e).toList();
+            List dataArticle = articles;
             return ListView.builder(
               itemCount: articles.length,
               itemBuilder: (context, index) {
@@ -51,6 +54,15 @@ class NewsListScreen extends ConsumerWidget {
           ),
         ),
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          creat();
+          OfflineDataHandler.hiveData();
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
+
+  void creat() {}
 }
