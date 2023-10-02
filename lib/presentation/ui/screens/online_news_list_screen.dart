@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news_reader/data/models/news_model.dart';
-import 'package:flutter_news_reader/data/offline_data/offline_data_handler.dart';
 import 'package:flutter_news_reader/presentation/ui/screens/news_details_screen.dart';
+import 'package:flutter_news_reader/presentation/ui/screens/offline_news_list_screen.dart';
 import 'package:flutter_news_reader/presentation/ui/widgets/news_card.dart';
 import 'package:flutter_news_reader/provider/data_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class NewsListScreen extends ConsumerWidget {
-  const NewsListScreen({super.key});
+class OnlineNewsListScreen extends ConsumerWidget {
+  const OnlineNewsListScreen({super.key});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -51,15 +50,6 @@ class NewsListScreen extends ConsumerWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          creat();
-          OfflineDataHandler.hiveData();
-        },
-        child: Icon(Icons.add),
-      ),
     );
   }
-
-  void creat() {}
 }

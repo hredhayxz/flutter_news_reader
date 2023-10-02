@@ -1,12 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_reader/data/models/news_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 class NewsCard extends StatelessWidget {
   final ArticlesData article;
 
   const NewsCard({
-    super.key,
+    Key? key,
     required this.article,
   });
 
@@ -23,19 +24,34 @@ class NewsCard extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: <Widget>[
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: CachedNetworkImage(
-                  imageUrl: article.urlToImage.toString(),
-                  width: double.infinity,
-                  height: 200,
-                  fit: BoxFit.cover,
-                  placeholder: (context, url) => const Icon(Icons.image),
-                  errorWidget: (context, url, error) => const Icon(Icons.error),
-                ),
+              Stack(
+                children: <Widget>[
+                  CachedNetworkImage(
+                    imageUrl: article.urlToImage.toString(),
+                    width: double.infinity,
+                    height: 200,
+                    fit: BoxFit.cover,
+                    placeholder: (context, url) => Container(
+                      width: double.infinity,
+                      height: 200,
+                      color: Colors.grey[300],
+                    ),
+                    errorWidget: (context, url, error) => const Icon(Icons.error),
+                  ),
+                  if (article.urlToImage == null)
+                    Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        width: double.infinity,
+                        height: 200,
+                        color: Colors.transparent,
+                      ),
+                    ),
+                ],
               ),
               const SizedBox(
-                width: 10,
+                height: 10,
               ),
               Text(
                 article.title.toString(),
@@ -49,9 +65,10 @@ class NewsCard extends StatelessWidget {
                 article.description.toString(),
                 maxLines: 3,
                 style: const TextStyle(
-                    fontSize: 13,
-                    color: Colors.grey,
-                    overflow: TextOverflow.ellipsis),
+                  fontSize: 13,
+                  color: Colors.grey,
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
             ],
           ),

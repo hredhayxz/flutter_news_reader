@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_news_reader/presentation/ui/screens/news_list_screen.dart';
+import 'package:flutter_news_reader/presentation/ui/screens/internet_connectivity_checker.dart';
 
 class NewsReader extends StatelessWidget {
   const NewsReader({super.key});
@@ -12,7 +12,7 @@ class NewsReader extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const NewsListScreen(),
+      home: const NetworkConnectivityChecker(),
     );
   }
 }
