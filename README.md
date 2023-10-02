@@ -65,6 +65,7 @@ News Read integrates the following packages to enhance functionality:
 - `flutter_riverpod: ^2.4.1`: Flutter Riverpod for state management.
 - `hive: ^2.2.3 & hive_flutter: ^1.1.0`: As a local database for store news.
 - `connectivity_plus: ^4.0.2`: Use this for checking network connectivity.
+- `flutter_launcher_icons: ^0.13.1`: Simplify the generation of launcher icons on various platforms.
   
 ## Project Directory Structure
 
