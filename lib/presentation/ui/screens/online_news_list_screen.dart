@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_news_reader/presentation/ui/provider/data_provider.dart';
 import 'package:flutter_news_reader/presentation/ui/screens/news_details_screen.dart';
-import 'package:flutter_news_reader/presentation/ui/screens/offline_news_list_screen.dart';
 import 'package:flutter_news_reader/presentation/ui/widgets/news_card.dart';
-import 'package:flutter_news_reader/provider/data_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class OnlineNewsListScreen extends ConsumerWidget {
@@ -50,7 +49,7 @@ class OnlineNewsListScreen extends ConsumerWidget {
           data: (data) {
             if (data.isEmpty) {
               return Center(
-                child: Text("No data available."),
+                child: Text("No data available. Please refresh!"),
               );
             }
             return ListView.builder(

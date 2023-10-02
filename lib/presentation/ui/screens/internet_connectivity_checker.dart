@@ -25,6 +25,7 @@ class _NetworkConnectivityCheckerState
       result = await Connectivity().checkConnectivity();
       if (result != ConnectivityResult.none) {
         isConnected = true;
+        setState(() {});
       } else {
         isConnected = false;
       }
@@ -32,9 +33,8 @@ class _NetworkConnectivityCheckerState
       print('Error in checkInternet: $error');
       isConnected = false;
     }
-    setState(() {
-      hasError = isConnected == false;
-    });
+    hasError = isConnected == false;
+    setState(() {});
   }
 
   void startStreaming() {
