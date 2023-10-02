@@ -7,9 +7,8 @@ A simple News app using [News API](https://newsapi.org).
 
 ## Responsibilities
 
-- Read breaking news and all news accross the globe from a variety of sources
+- Read all news accross the globe from a variety of sources
 - Save news for offline reading
-- Search news by keyword or topic
 - Simple and user-friendly interface
 
 ## News Read UI
@@ -64,6 +63,13 @@ News Read integrates the following packages to enhance functionality:
 - `hive: ^2.2.3 & hive_flutter: ^1.1.0`: As a local database for store news.
 - `connectivity_plus: ^4.0.2`: Use this for checking network connectivity.
 - `flutter_launcher_icons: ^0.13.1`: Simplify the generation of launcher icons on various platforms.
+
+## Challange I Faced
+- The first time I used `Hive`, it was complicated for me. I overcame this challenge by reading the documentation and having discussions with my close mates.
+- When I used `Riverpod` for the first time, it was also complicated for me. I overcame this challenge by reading the documentation, watching YouTube videos, and having discussions with my close mates.
+
+
+
   
 ## Project Directory Structure
 
