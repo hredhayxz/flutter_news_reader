@@ -7,9 +7,8 @@ A simple News app using [News API](https://newsapi.org).
 
 ## Responsibilities
 
-- Read breaking news and all news accross the globe from a variety of sources
+- Read all news accross the globe from a variety of sources
 - Save news for offline reading
-- Search news by keyword or topic
 - Simple and user-friendly interface
 
 ## News Read UI
