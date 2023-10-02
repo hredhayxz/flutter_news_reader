@@ -8,26 +8,46 @@ class LocalDataStorage {
   static Box<ArticlesData>? _dataBox;
 
   static Future<void> init() async {
-    if (_dataBox == null) {
-      await Hive.openBox<ArticlesData>('articlesDataBox');
-      _dataBox = await Hive.openBox<ArticlesData>('articlesDataBox');
+    try {
+      if (_dataBox == null) {
+        await Hive.openBox<ArticlesData>('articlesDataBox');
+        _dataBox = await Hive.openBox<ArticlesData>('articlesDataBox');
+      }
+    } catch (error) {
+      log('Error in init: $error');
+      rethrow;
     }
   }
 
   static Future<void> saveArticlesData(List<ArticlesData> articlesData) async {
-    await init();
-    await _dataBox?.clear();
-    await _dataBox?.addAll(articlesData);
-    log(articlesData.length.toString());
-    log(articlesData.toString());
+    try {
+      await init();
+      await _dataBox?.clear();
+      await _dataBox?.addAll(articlesData);
+      log('Saved ${articlesData.length} articles to local storage.');
+    } catch (error) {
+      log('Error in saveArticlesData: $error');
+      rethrow;
+    }
   }
 
   static Future<List<ArticlesData>> getArticlesFromDatabase() async {
-    final box = await Hive.openBox<ArticlesData>('articlesDataBox');
-    return box.values.toList();
+    try {
+      final box = await Hive.openBox<ArticlesData>('articlesDataBox');
+      return box.values.toList();
+    } catch (error) {
+      log('Error in getArticlesFromDatabase: $error');
+      return [];
+    }
   }
 
   static Future<void> clearArticlesData() async {
-    await _dataBox?.clear();
+    try {
+      await _dataBox?.clear();
+      log('Cleared articles data from local storage.');
+    } catch (error) {
+      log('Error in clearArticlesData: $error');
+      rethrow;
+    }
   }
 }

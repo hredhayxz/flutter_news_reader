@@ -13,16 +13,46 @@ class OnlineNewsListScreen extends ConsumerWidget {
     final data = ref.watch(DataProvider.articleDataProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Latest News"),
+        title: Row(
+          children: [
+            const Text('Latest News'),
+            Spacer(),
+            Container(
+              width: 20,
+              height: 20,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.green,
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text('Online')
+          ],
+        ),
       ),
       body: RefreshIndicator(
         onRefresh: () async {
           print("Refreshing data...");
-          ref.refresh(DataProvider.articleDataProvider);
-          print("Data refreshed!");
+          try {
+            await ref.refresh(DataProvider.articleDataProvider);
+            print("Data refreshed!");
+          } catch (e) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text("Error refreshing data: $e"),
+              ),
+            );
+          }
         },
         child: data.when(
           data: (data) {
+            if (data.isEmpty) {
+              return Center(
+                child: Text("No data available."),
+              );
+            }
             return ListView.builder(
               itemCount: data.length,
               itemBuilder: (context, index) {

@@ -18,20 +18,30 @@ class _NetworkConnectivityCheckerState
   late ConnectivityResult result;
   late StreamSubscription<ConnectivityResult> subscription;
   var isConnected = false;
+  var hasError = false;
 
-  checkInternet() async {
-    result = await Connectivity().checkConnectivity();
-    if (result != ConnectivityResult.none) {
-      isConnected = true;
-    } else {
+  Future<void> checkInternet() async {
+    try {
+      result = await Connectivity().checkConnectivity();
+      if (result != ConnectivityResult.none) {
+        isConnected = true;
+      } else {
+        isConnected = false;
+      }
+    } catch (error) {
+      print('Error in checkInternet: $error');
       isConnected = false;
     }
-    setState(() {});
+    setState(() {
+      hasError = isConnected == false;
+    });
   }
 
-  startStreaming() {
+  void startStreaming() {
     subscription = Connectivity().onConnectivityChanged.listen((event) {
       checkInternet();
+    }, onError: (error) {
+      print('Error in startStreaming: $error');
     });
   }
 
@@ -51,9 +61,6 @@ class _NetworkConnectivityCheckerState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: isConnected == true
-            ? const OnlineNewsListScreen()
-            : const OfflineNewsListScreen(),
-    );
+        body: hasError ? OfflineNewsListScreen() : OnlineNewsListScreen());
   }
 }

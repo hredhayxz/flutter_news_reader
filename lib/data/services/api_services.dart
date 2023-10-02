@@ -7,18 +7,24 @@ import 'package:http/http.dart';
 
 class ApiServices {
   Future<List<ArticlesData>> getRequest() async {
-    Response response = await get(Uri.parse(Urls.getNews));
-    log(response.statusCode.toString());
-    log(response.body);
-    final decodedResponse = jsonDecode(response.body);
-    if (response.statusCode == 200) {
-      final List result = decodedResponse['articles'];
-      final List<ArticlesData> articlesDataList =
-          result.map(((e) => ArticlesData.fromJson(e))).toList();
-      LocalDataStorage.saveArticlesData(articlesDataList);
-      return articlesDataList;
-    } else {
-      throw Exception(response.reasonPhrase);
+    try {
+      Response response = await get(Uri.parse(Urls.getNews));
+      log(response.statusCode.toString());
+      log(response.body);
+
+      if (response.statusCode == 200) {
+        final decodedResponse = jsonDecode(response.body);
+        final List result = decodedResponse['articles'];
+        final List<ArticlesData> articlesDataList =
+            result.map((e) => ArticlesData.fromJson(e)).toList();
+        LocalDataStorage.saveArticlesData(articlesDataList);
+        return articlesDataList;
+      } else {
+        throw Exception(response.reasonPhrase);
+      }
+    } catch (error) {
+      log('Error in getRequest: $error');
+      return [];
     }
   }
 }

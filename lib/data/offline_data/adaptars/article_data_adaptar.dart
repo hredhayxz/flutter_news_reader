@@ -9,13 +9,22 @@ class ArticlesDataAdapter extends TypeAdapter<ArticlesData> {
 
   @override
   ArticlesData read(BinaryReader reader) {
-    final Map<String, dynamic> json = jsonDecode(reader.read());
-    return ArticlesData.fromJson(json);
+    try {
+      final Map<String, dynamic> json = jsonDecode(reader.read());
+      return ArticlesData.fromJson(json);
+    } catch (error) {
+      print('Error in read: $error');
+      return ArticlesData();
+    }
   }
 
   @override
   void write(BinaryWriter writer, ArticlesData obj) {
-    final jsonStr = jsonEncode(obj.toJson());
-    writer.write(jsonStr);
+    try {
+      final jsonStr = jsonEncode(obj.toJson());
+      writer.write(jsonStr);
+    } catch (error) {
+      print('Error in write: $error');
+    }
   }
 }

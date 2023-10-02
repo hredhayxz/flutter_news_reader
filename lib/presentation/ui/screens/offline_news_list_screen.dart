@@ -11,7 +11,24 @@ class OfflineNewsListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Offline News'),
+        title: Row(
+          children: [
+            const Text('Latest News'),
+            Spacer(),
+            Container(
+              width: 20,
+              height: 20,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.red,
+              ),
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text('Offline')
+          ],
+        ),
       ),
       body: FutureBuilder<List<ArticlesData>>(
         future: LocalDataStorage.getArticlesFromDatabase(),
@@ -19,7 +36,9 @@ class OfflineNewsListScreen extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(
+              child: Text('Error: ${snapshot.error.toString()}'),
+            );
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
             return const Center(child: Text('No data available'));
           } else {
