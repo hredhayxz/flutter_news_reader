@@ -13,14 +13,12 @@ A simple News app using [News API](https://newsapi.org).
 - Simple and user-friendly interface
 
 ## News Read UI
-<!--<div style="display: flex; flex-wrap: wrap;">
-    <img src="https://github.com/muj-i/square_ghost/blob/main/screenshots/ss1.png" width="250" />
-    <img src="https://github.com/muj-i/square_ghost/blob/main/screenshots/ss2.png" width="250" />
-    <img src="https://github.com/muj-i/square_ghost/blob/main/screenshots/ss3.png" width="250" />
-    <img src="https://github.com/muj-i/square_ghost/blob/main/screenshots/ss4.png" width="250" />
-    <img src="https://github.com/muj-i/square_ghost/blob/main/screenshots/ss5.png" width="250" />
-    
-</div>-->
+<div style="display: flex; flex-wrap: wrap;">
+    <img src="https://github.com/hredhayxz/flutter_news_reader/blob/main/screenshots/s1.png" width="250" />
+    <img src="https://github.com/hredhayxz/flutter_news_reader/blob/main/screenshots/s2.png" width="250" />
+    <img src="https://github.com/hredhayxz/flutter_news_reader/blob/main/screenshots/s3.png" width="250" />
+    <img src="https://github.com/hredhayxz/flutter_news_reader/blob/main/screenshots/s4.png" width="250" />
+</div>
 ## Getting Started
 
 ### Prerequisites
