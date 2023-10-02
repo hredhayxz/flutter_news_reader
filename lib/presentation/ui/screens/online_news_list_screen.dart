@@ -47,11 +47,6 @@ class OnlineNewsListScreen extends ConsumerWidget {
         },
         child: data.when(
           data: (data) {
-            if (data.isEmpty) {
-              return Center(
-                child: Text("No data available. Please refresh!"),
-              );
-            }
             return ListView.builder(
               itemCount: data.length,
               itemBuilder: (context, index) {
