@@ -19,12 +19,12 @@ class _SplashScreenState extends State<SplashScreen> {
 
   Future<void> goToNextScreen() async {
     Future.delayed(const Duration(seconds: 2)).then((value) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) =>NetworkConnectivityChecker(),
-        ),
-      );
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+            builder: (context) => NetworkConnectivityChecker(),
+          ),
+          (route) => false);
     });
   }
 

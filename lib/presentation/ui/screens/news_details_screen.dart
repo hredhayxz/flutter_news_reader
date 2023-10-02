@@ -49,10 +49,15 @@ class NewsDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 Spacer(),
-                Text(
-                  'Author: ${article.author}',
-                  style: const TextStyle(
-                    color: Colors.grey,
+                SizedBox(
+                  width: 120,
+                  child: FittedBox(
+                    child: Text(
+                      'Author: ${article.author}',
+                      style: const TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
                   ),
                 ),
               ],
