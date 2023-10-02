@@ -51,11 +51,9 @@ class _NetworkConnectivityCheckerState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: isConnected == true
+      body: isConnected == true
             ? const OnlineNewsListScreen()
             : const OfflineNewsListScreen(),
-      ),
     );
   }
 }

@@ -26,17 +26,20 @@ class NewsCard extends StatelessWidget {
             children: <Widget>[
               Stack(
                 children: <Widget>[
-                  CachedNetworkImage(
-                    imageUrl: article.urlToImage.toString(),
-                    width: double.infinity,
-                    height: 200,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Container(
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: CachedNetworkImage(
+                      imageUrl: article.urlToImage.toString(),
                       width: double.infinity,
                       height: 200,
-                      color: Colors.grey[300],
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => Container(
+                        width: double.infinity,
+                        height: 200,
+                        color: Colors.grey[300],
+                      ),
+                      errorWidget: (context, url, error) => const Icon(Icons.error),
                     ),
-                    errorWidget: (context, url, error) => const Icon(Icons.error),
                   ),
                   if (article.urlToImage == null)
                     Shimmer.fromColors(
